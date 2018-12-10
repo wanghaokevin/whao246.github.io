@@ -110,30 +110,28 @@
 
 
 
-  <meta name="description" content="基本原理Logistic Regression和Linear Regression的原理是相似的，可以简单描述这样的过程: 1、找一个合适的预测函数，一般表示为h函数，该函数就是我们需要找到的分类函数，它用来预测输入数据的判断过程。这个过程很重要，需要多数据有一定的了解或分析，直到或猜测到预测函数的大概形式，比如是线性函数还是非线性函数。 2、构造一个cost函数(损失函数)，该函数表示预测的输出">
-<meta name="keywords" content="逻辑斯蒂回归">
+  <meta name="description" content="BiSeNet提出双向分割网络，包含两个部分：Spatial Path(SP)he Context Path(CP).这两个部分分别用来解决空间信息缺失和感受野缩小的问题。">
+<meta name="keywords" content="语义分割">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Logistic回归">
-<meta property="og:url" content="https://whao246.github.io/2018/12/02/Logisti回归总结/index.html">
+<meta property="og:title" content="论文阅读:BiSeNet">
+<meta property="og:url" content="https://whao246.github.io/2018/12/06/BiSeNet/index.html">
 <meta property="og:site_name" content="whao">
-<meta property="og:description" content="基本原理Logistic Regression和Linear Regression的原理是相似的，可以简单描述这样的过程: 1、找一个合适的预测函数，一般表示为h函数，该函数就是我们需要找到的分类函数，它用来预测输入数据的判断过程。这个过程很重要，需要多数据有一定的了解或分析，直到或猜测到预测函数的大概形式，比如是线性函数还是非线性函数。 2、构造一个cost函数(损失函数)，该函数表示预测的输出">
+<meta property="og:description" content="BiSeNet提出双向分割网络，包含两个部分：Spatial Path(SP)he Context Path(CP).这两个部分分别用来解决空间信息缺失和感受野缩小的问题。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/007r9keVly1fxgkq3vflqj308r04jwef.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/007r9keVly1fxgp8r5vljj30mk0ey3zz.jpg">
-<meta property="og:image" content="https://whao246.github.io/home/whao/.config/Typora/typora-user-images/1543064899856.png">
-<meta property="og:image" content="https://whao246.github.io/home/whao/.config/Typora/typora-user-images/1543064973384.png">
-<meta property="og:updated_time" content="2018-12-02T13:46:22.241Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/007r9keVly1fxwvbuswb6j30py0anjtb.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/007r9keVly1fxxy76mdruj30oq0cldib.jpg">
+<meta property="og:updated_time" content="2018-12-10T07:49:48.956Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Logistic回归">
-<meta name="twitter:description" content="基本原理Logistic Regression和Linear Regression的原理是相似的，可以简单描述这样的过程: 1、找一个合适的预测函数，一般表示为h函数，该函数就是我们需要找到的分类函数，它用来预测输入数据的判断过程。这个过程很重要，需要多数据有一定的了解或分析，直到或猜测到预测函数的大概形式，比如是线性函数还是非线性函数。 2、构造一个cost函数(损失函数)，该函数表示预测的输出">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/007r9keVly1fxgkq3vflqj308r04jwef.jpg">
+<meta name="twitter:title" content="论文阅读:BiSeNet">
+<meta name="twitter:description" content="BiSeNet提出双向分割网络，包含两个部分：Spatial Path(SP)he Context Path(CP).这两个部分分别用来解决空间信息缺失和感受野缩小的问题。">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/007r9keVly1fxwvbuswb6j30py0anjtb.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://whao246.github.io/2018/12/02/Logisti回归总结/">
+  <link rel="canonical" href="https://whao246.github.io/2018/12/06/BiSeNet/">
 
 
 
@@ -143,7 +141,7 @@
   };
 </script>
 
-  <title>Logistic回归 | whao</title>
+  <title>论文阅读:BiSeNet | whao</title>
   
 
 
@@ -342,7 +340,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://whao246.github.io/2018/12/02/Logisti回归总结/">
+    <link itemprop="mainEntityOfPage" href="https://whao246.github.io/2018/12/06/BiSeNet/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="whao">
@@ -359,7 +357,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Logistic回归
+          <h1 class="post-title" itemprop="name headline">论文阅读:BiSeNet
               
             
           </h1>
@@ -384,12 +382,24 @@
                 
               
 
-              <time title="创建时间：2018-12-02 16:52:44 / 修改时间：21:46:22" itemprop="dateCreated datePublished" datetime="2018-12-02T16:52:44+08:00">2018-12-02</time>
+              <time title="创建时间：2018-12-06 10:53:13" itemprop="dateCreated datePublished" datetime="2018-12-06T10:53:13+08:00">2018-12-06</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-10 15:49:48" itemprop="dateModified" datetime="2018-12-10T15:49:48+08:00">2018-12-10</time>
               
             
           </span>
@@ -406,7 +416,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习算法/" itemprop="url" rel="index"><span itemprop="name">机器学习算法</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/计算机视觉/" itemprop="url" rel="index"><span itemprop="name">计算机视觉</span></a></span>
 
                 
                 
@@ -434,7 +444,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.5k</span>
+                <span title="本文字数">2.6k</span>
               
 
               
@@ -448,11 +458,13 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">4 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
 
+          
+              <div class="post-description">BiSeNet提出双向分割网络，包含两个部分：Spatial Path(SP)he Context Path(CP).这两个部分分别用来解决空间信息缺失和感受野缩小的问题。</div>
           
 
         </div>
@@ -468,39 +480,30 @@
       
 
       
-        <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>Logistic Regression和Linear Regression的原理是相似的，可以简单描述这样的过程:</p>
-<p>1、找一个合适的预测函数，一般表示为h函数，该函数就是我们需要找到的分类函数，它用来预测输入数据的判断过程。这个过程很重要，需要多数据有一定的了解或分析，直到或猜测到预测函数的大概形式，比如是线性函数还是非线性函数。</p>
-<p>2、构造一个cost函数(损失函数)，该函数表示预测的输出（h）与训练数据类别(y)之间的偏差，可以是二者之间的差(h-y)或是其他形式。综合考虑所有训练数据的损失，将cost求和或者求平均，记为$J(\theta)$,表示所有训练数据预测值与实际类别的偏差。</p>
-<p>3、$J(\theta)$函数的值越小表示预测函数越准确(即h函数越精确)， 所以这一步需要做的是找到$J(\theta)$函数的最小值。找函数最小值有不同方法，Logistic Regression实现有梯度下降法和拟牛顿法。</p>
-<h2 id="逻辑斯蒂分布"><a href="#逻辑斯蒂分布" class="headerlink" title="逻辑斯蒂分布"></a>逻辑斯蒂分布</h2><p>设$X$是连续随机变量，$X$服从逻辑斯蒂分布是指$X$具有下列分布函数和密度函数:<br>$$<br>F(x)=P(X\leq x)=\frac{1}{1+e^{-(x-\mu)/\gamma}} \tag {1}<br>$$</p>
-<p>$$<br>f(x)=\acute{F}(x)=\frac{e^{-(x-\mu)/\gamma}}{\gamma({1+e^{-(x-\mu)/\gamma})^2}}\tag{2}<br>$$</p>
-<p>式中，$\mu$为位置参数，$\gamma&gt;0$为形状参数</p>
-<h2 id="逻辑斯蒂回归模型"><a href="#逻辑斯蒂回归模型" class="headerlink" title="逻辑斯蒂回归模型"></a>逻辑斯蒂回归模型</h2><h3 id="构造预测函数"><a href="#构造预测函数" class="headerlink" title="构造预测函数"></a>构造预测函数</h3><p>Logistic Regression 虽然名字中有“回归”， 但它实际上是一种分类方法，用于两分类问题。根据<strong>基本原理</strong>中的步骤，需要先找到一个预测函数(h),显然，该函数的输出必须是两个值，所以利用Logistic函数(Sigmoid函数)，函数形式为：<br>$$<br>g(z)=\frac{1}{1+e^{-z}}\tag{3<br>}<br>$$<br>对应的函数图像是一个取值在0到1之间的S曲线：</p>
-<p><img src="https://ws1.sinaimg.cn/large/007r9keVly1fxgkq3vflqj308r04jwef.jpg" alt=""></p>
-<p>接下来需要确定数据划分的边界类型，有线性边界和非线性边界。我们只讨论线性边界的情况：对于线性边界的情况，边界形式如下：<br>$$<br>\theta_0+\theta_1x_1+\cdots+\theta_nx_n=<br>\sum_{i=0}^n\theta_ix_i=\theta^Tx \tag{4}<br>$$<br>构造预测函数为：<br>$$<br>h_\theta(x)=g(\theta^Tx)=\frac{1}{1+e^{-\theta^{Tx}}}\tag{5}<br>$$<br>$h_\theta(x)$函数的值有特殊含义，它表示结果取1的概率，因此对于输入x分类结果为类别1和类别0的概率分别为：<br>$$<br>P(y=1|x;\theta)=h_\theta(x)<br>$$</p>
-<p>$$<br>P(y=0|x;\theta)=1-h_\theta(x)<br>$$</p>
-<h3 id="构造cost函数"><a href="#构造cost函数" class="headerlink" title="构造cost函数"></a>构造cost函数</h3><p>$$<br>\begin{equation}<br>cost(h_\theta(x), y)=\left{<br>\begin{array}{rcl}<br>-log(h_\theta(x)) &amp; &amp; {if \quad y=1}\\<br>-log(1-h_\theta(x))&amp; &amp; {if \quad y=0}\\<br>\end{array} \right.<br>\end{equation}<br>$$</p>
-<p>$$<br>J(\theta)=\frac{1}{m}\sum_{i=0}^mcost(h_\theta(x^{(i)}, y^)=-\frac{1}{m}[\sum_{i=0}^my^{(i)}log(h_\theta(x))+(1-y^{(i)})log(1-h_\theta(x))<br>$$</p>
-<p>实际上，cost函数和$J(\theta)$函数是基于<strong>最大似然估计</strong>推导得到的，下面是推导过程:<br>$$<br>P(y|x;\theta)=h_\theta(x)^y(1-h_\theta(x)^{1-y}<br>$$<br>取似然函数为：<br>$$<br>L(\theta)=\prod_{i=1}^mP(y^{(i)}|x^{(i)};\theta)=\prod_{i=1}^m(h_\theta(x^{(i)}))^{y^{(i)}}(1-h_\theta(x^{(i)})^{1-y^{(i)}}<br>$$<br>对数似然函数为：<br>$$<br>l(\theta)=logL(\theta)=\sum_{i=1}^m(y^{(i)}logh_\theta(x^{(i)})+(1-y^{(i)})log(1-h_\theta(x^{(i)})))<br>$$<br>最大似然估计就是要求得使<strong>l(θ</strong>)取最大值时的<strong>*θ*</strong>，其实这里可以使用梯度上升法求解，求得的<strong>*θ*</strong>就是要求的最佳参数。但是，在Andrew Ng的课程中将<strong>*J(θ)*</strong>取为:<br>$$<br>J(\theta)=-\frac{1}{m}l(\theta)<br>$$<br>因为乘了一个负的系数<strong>-1/m</strong>，所以<strong>*J(θ)*</strong>取最小值时的<strong>*θ*</strong>为要求的最佳参数.</p>
-<h3 id="梯度下降法求-J-theta-的最小值"><a href="#梯度下降法求-J-theta-的最小值" class="headerlink" title="梯度下降法求$J(\theta)$的最小值"></a>梯度下降法求$J(\theta)$的最小值</h3><p>求$J(\theta)$的最小值可以使用梯度下降法，根据剃度下降法可得$\theta$的更新过程：<br>$$<br>\theta_j:=\theta_j-\alpha\frac{\partial}{\partial\theta_j}J(\theta)<br>$$<br>式中$\alpha$为学习步长，下面求偏导：</p>
-<p><img src="https://ws1.sinaimg.cn/large/007r9keVly1fxgp8r5vljj30mk0ey3zz.jpg" alt=""></p>
-<h1 id="最大熵模型"><a href="#最大熵模型" class="headerlink" title="最大熵模型"></a>最大熵模型</h1><h2 id="什么是最大熵"><a href="#什么是最大熵" class="headerlink" title="什么是最大熵"></a>什么是最大熵</h2><p>最大熵原理是概率模型学习的一个准则，最大熵原理认为，学习 模型时，在所有可能的概率模型(分布)中，熵最大的模型是最好的模型。</p>
-<p>熵是随机变量不确定性的度量，不确定性越大，熵越大；入耳随机变量退化成定值，熵为0</p>
-<p>均匀分布是“最不确定”的分布</p>
-<h3 id="熵的定义"><a href="#熵的定义" class="headerlink" title="熵的定义"></a>熵的定义</h3><p>熵：如果一个随机变量x={x1, x2, x3,…xk}, 其概率分布为p(x=xi)=pi,则随机变量x的熵定义为：<br>$$<br>H(x) = -\sum_xP(x)logp(x)<br>$$<br>把前面的符号放到最后，便成了：<br>$$<br>H(x) = \sum_xP(x)log\frac{1}{p(x)}<br>$$<br>联合熵:两个随机变量x，Y的联合分布，可以形成联合熵，用$H(x, Y)$表示</p>
-<p>条件熵：在随机变量X发生的前提下，随机变量Y发生所新带来的熵定义为Y的条件熵，用$H(Y|X)$表示，用来衡量在已知随机变量X的条件下随机变量Y的不确定性。且有此式子成立：$H(Y|X)=H(X,Y)-H(X)$，整个式子表示(X,Y)发生所包含的熵减去X单独发生包含的熵。</p>
-<p><img src="/home/whao/.config/Typora/typora-user-images/1543064899856.png" alt="1543064899856"></p>
-<p>互信息：两个随机变量X， Y的互信息定义为X，Y的联合分布和各自独立分布乘积的相对熵，用$I(X, Y)$表示：<br>$$<br>I(X, Y)=\sum_{x, y}P(x, y)log\frac{p(x, y)}{p(x)p(y)}<br>$$</p>
-<h2 id="最大熵模型定义"><a href="#最大熵模型定义" class="headerlink" title="最大熵模型定义"></a>最大熵模型定义</h2><p>给定训练数据集，可以确定联合分布$P(X,Y)$的经验分布和边缘分布$P(x)$的经验分布，分别以$\hat p(X,Y)$和$\hat P(X)$表示。<br>$$<br>\hat p(X=x, Y=y)=\frac{v(X=x,Y=y)}{N} \\\hat p(X=x)=\frac{v(X=x)}{N}<br>$$<br>用特征函数$f(x, y)$描述输入x和输出y之间的某一事实，其定义：<br>$$<br>\begin{equation}<br>f(x,y)=\left{<br>\begin{array}{rc1}<br>1, &amp; &amp; {x与y满足某一事实}\\<br>0, &amp; &amp; {否则} \\<br>\end{array} \right.<br>\end{equation}<br>$$<br>特征函数$f(x,y)$关于经验分布$\hat p(X,Y)$的期望值。用$E_\hat p(f)$表示：<br>$$<br>E_\hat p(f)=\sum_{x,y}\hat p(x, y)f(x, y)<br>$$<br>特征函数关于模型$p(Y|X)$与经验分布$\hat p(X)$的期望值，用$E_p(f)$表示：<br>$$<br>E_p(f)=\sum_{x,y}\hat p(x)p(y|x)f(x, y)<br>$$<br>如果模型能够获取训练数据中的信息，那么可以假设两个期望值相等，即：<br>$$<br>E_\hat p(f)=E_p(f)<br>$$</p>
-<h3 id="最大熵模型-1"><a href="#最大熵模型-1" class="headerlink" title="最大熵模型"></a>最大熵模型</h3><p>假设满足所有约束条件的模型集合为：$C\equiv {p\in \rho| E_p(f_i)=E_\hat p(f_i), \quad i=1,2,3,\cdots ,n}$</p>
-<p>定义在条件概率分布$P(Y|X)$上的条件熵为：<br>$$<br>H(p)=-\sum_{x,y}\hat P(x)P(y|x)logP(y|x)<br>$$<br>则模型集合C中条件熵$H(p)$最大的模型集合称为最大熵模型。</p>
-<h3 id="最大熵模型学习"><a href="#最大熵模型学习" class="headerlink" title="最大熵模型学习"></a>最大熵模型学习</h3><p>最大熵模型的学习过程就是求解最大熵模型的过程，最大熵模型的学习可以形式化为约束最优化问题。</p>
-<p>​                 <img src="/home/whao/.config/Typora/typora-user-images/1543064973384.png" alt="1543064973384"></p>
-<p>最优化的原始问题是$min_{p\in c \quad max_w L(p, w)}$</p>
-<p>对偶问题是$max_w\quad min_{p\in c   L(p, w)}$</p>
-<p>由于拉格朗日函数$L(p,w)$是p的凸函数，因此原始问题的解和对偶问题的解是等价的。。可以通过求对偶问题的解来求原始问题。</p>
-<p>求解对偶问题首先求解内部的极小化问题$min_{p\in c}L(p,w)$,将其记作<br>$$<br>\psi(w)=min_{p\in c}L(p,w)=L(p, w)<br>$$<br>$\psi(w)$称为对偶函数，其解记作<br>$$<br>P_w=arg\ min_{p\in c}L(p,w)=P_w(y|x)<br>$$<br>具体地，求$L(p, w)$对$p(y|x)$的偏导数：<br>$$<br>\begin{equation}<br>\begin{aligned}<br>\frac{\partial L(P, w)}{\partial P(y|x)}=\sum_{x, y}\hat P(x)(logp(y|x)+1)-\sum_yw_0-\sum_{x,y}\hat P(x)\sum_{i=1}^nw_if_i(x, y) \\<br>=\sum_{x,y} \hat P(x)(log\ p(y|x)+1-w_0-\sum_{i=1}w_if_i(x,y))<br>\end{aligned}<br>\end{equation}<br>$$<br>令偏导数等于0， $\hat p(x)&gt;0$的情况下，解得：<br>$$<br>P(y|x)=exp(\sum_{i=1}^nw_if_i(x,y)+w_0-1)=\frac{exp(\sum_{i=1}^nw_if_i(x,y))}{exp(1-w_0)}<br>$$<br>由于$\sum_y P(y|x)=1$,得：<br>$$<br>P_w(y|x)=\frac{1}{Z_w(x)}exp(\sum_{i=1}^nw_if_i(x,y))<br>$$<br>其中，<br>$$<br>Z_w(x)=\sum_yexp(\sum_{i=1}^nw_if_i(x,y))<br>$$<br>之后，求解对偶问题外部极大值问题$max_w \psi(w)$</p>
-<p>将其解记为$w^<em>$, 即<br>$$<br>w^</em>=arg\ max_w\psi(w)<br>$$</p>
+        <h1 id="BiSeNet：实时语义分割"><a href="#BiSeNet：实时语义分割" class="headerlink" title="BiSeNet：实时语义分割"></a>BiSeNet：实时语义分割</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>语义分割要求有丰富的空间信息和感受野。然而目前大多数的实时语义分割方法大多通过妥协空间分辨率以达到实时的要求，导致性能较差。旷世科技提出一种双向分割网络Bilateral Segmentation Network (BiSeNet)，不仅实现了实时语义分割， 还在特征融合模块和注意力优化模块的帮助下，把语义分割的性能推进到一个新高度。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>语义分割是计算机视觉领域的一项基本任务，旨在为一张图片上的每一个像素打上语义标签，可应用语增强现实、自动驾驶、安防监控等领域，这些应用要求能够快速响应。最近，实时语义分割的算法主要有以下三种方法：</p>
+<p>1、通过裁剪或resize限定输入的大小，以降低计算复杂度。尽管这种方法简单有效，但是空间细节信息的损失尤其是边界信息的损失，导致度量和可视化精度下降。</p>
+<p>2、通过减少网络通道数加快处理速度，尤其是在骨干网络的早期阶段，但是这会弱化空间信息。</p>
+<p>3、为追求及其紧凑的框架而丢弃模型的最后阶段(比如ENet)，这种方法的缺点也很明显：ENet丢弃了模型最后阶段的下采样，模型的感受野不足以涵盖大物体，导致判别能力较差。</p>
+<p>总之，这三种方法都是折中精度以求速度，难以付诸实践。如图一(a)所示。</p>
+<p>为了补救上文提到的空间细节损失，研究者广泛利用U型结构，U型结构逐渐增加空间分辨率并恢复一些丢失的细节。然而，这种结构有两个缺点：1.完整的U型结构由于高分辨率的特征图而引入额外计算导致速度降低2.更重要的是，大多数通过裁剪或减少通道而损失的信息无法通过引入浅层而轻易恢复。换言之，U型结构最多是一个备选方法，而不是最终解决方案。如图一(b)所示</p>
+<p><img src="https://ws1.sinaimg.cn/large/007r9keVly1fxwvbuswb6j30py0anjtb.jpg" alt="图一"></p>
+<center>图一：不同模型的加速方法</center>
+
+<h2 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h2><p>基于上述观察，提出的双向分割网络Bilateral Segmentation Network (BiSeNet)包含两部分：Spatial Path (SP) and Context Path (CP)。这两个部分分别用来解决空间信息缺失和感受野缩小的问题。对于Spatial Path,本文只叠加三个卷积层以获得1/8特征图，保留了丰富的空间细节。对于Context Path，在Xeption尾部附加一个全局平均池化，其中感受野是骨干网络的最大值。如图一(c)所示。</p>
+<p>为了在不损失速度的情况下追求更高的准确率，我们也研究了两个模块的融合和最后预测的优化。并分别提出了特征融合模块Feature Fusion Module (FFM)和注意力优化模块Attention Refinement Module (ARM)。</p>
+<h2 id="BiSeNet"><a href="#BiSeNet" class="headerlink" title="BiSeNet"></a>BiSeNet</h2><p>本节中，首先详细介绍了BiSeNet网络及其两路网络 Spatial Path 和 Context Path；接着， 分别证明其有效性；最后，展示如何利用特征融合模块整合这两路网络的特征以及BiSeNet的整体架构。</p>
+<h3 id="Spatial-Path"><a href="#Spatial-Path" class="headerlink" title="Spatial Path"></a>Spatial Path</h3><p>在语义分割任务中， 空间分辨率和感受野很难两全，尤其是在实时语义分割的情况下，现有的方法通常是利用小的输入图像或者轻量主干模型实现加速。但是小图像相较于原图像缺失了很多空间信息， 而轻量级模型则由于裁剪通道而损失了空间信息。</p>
+<p>基于这一观察，本文提出的Spatial Path以保留原始输入图像的空间尺度，并编码丰富空间信息。Spatial Path包含三层，每层包含一个步长为2的卷积，随后是批归一化层和RelU层。因此，该路网络可以输出相当于原始图像1/8大小的特征图。由于大尺寸的特征图，编码丰富的空间特征。图二显示了结构细节</p>
+<p><img src="https://ws1.sinaimg.cn/large/007r9keVly1fxxy76mdruj30oq0cldib.jpg" alt=""></p>
+<center>图二：BiSeNet概览</center>
+
+<h3 id="Context-Path"><a href="#Context-Path" class="headerlink" title="Context Path"></a>Context Path</h3><p>在语义分割任务中，感受野对于性能表现至关重要。为增大感受野，一些方法利用金字塔池化模块，金字塔型空洞池化(ASPP)或者“large kernel”，但是这些操作比较耗费计算和内存， 导致速度较慢。出于较大感受野和较高计算效率兼得的考量， 本文提出Context Path， 它充分利用轻量级模型与全局平均池化以提供大感受野。轻量级模型中，本文借助 U 形结构融合最后两个阶段的特征，但这不是一个完整的 U 形结构。图 2(c) 全面展示了 Context Path。</p>
+<h3 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h3><p>在 Spatial Path 和 Context Path 的基础上，本文提出 BiSeNet，以实现实时语义分割，如图 2(a) 所示。本文把预训练的 Xception 作为 Context Path 的 backbone，把带有步幅的三个卷积层作为 Spatial Path；接着本文融合这两个组件的输出特征以做出最后预测，它可以同时实现实时性能与高精度。</p>
+<p>首先，本文聚焦于实际的计算方面。尽管 Spatial Path 有大感受野，但只有三个卷积层。因此，它并非计算密集的。对于 Context Path，本文借助一个轻量级模型快速下采样。进而，这两个组件并行计算，极大地提升了效率。第二，本文还讨论了网络的精度方面。Spatial Path 编码丰富的空间信息，Context Path 提供大感受野，两者相辅相成，从而实现更高性能。</p>
+<p>特征融合模块：在特征表示的层面上，两路网络的特征并不相同。因此不能简单地加权这些特征。由 Spatial Path 捕获的空间信息编码了绝大多数的丰富细节信息。而 Context Path 的输出特征主要编码语境信息。换言之，Spatial Path 的输出特征是低层级的，Context Path 的输出特征是高层级的。因此，本文提出一个独特的特征融合模块以融合这些特征。</p>
+<p>在特征的不同层级给定的情况下，本文首先连接 Spatial Path 和 Context Path 的输出特征；接着，通过批归一化平衡特征的尺度。下一步，像 SENet 一样，把相连接的特征池化为一个特征向量，并计算一个权重向量。这一权重向量可以重新加权特征，起到特征选择和结合的作用。图 2(c) 展示了这一设计的细节。</p>
+<p>损失函数：本文通过辅助损失函数监督模型的训练，通过主损失函数监督整个 BiSeNet 的输出。另外，还通过添加两个特殊的辅助损失函数监督 Context Path 的输出，就像多层监督一样。上述所有损失函数都是 Softmax。最后借助参数 α 以平衡主损失函数与辅助损失函数的权重。</p>
 
       
     </div>
@@ -524,7 +527,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/逻辑斯蒂回归/" rel="tag"># 逻辑斯蒂回归</a>
+            <a href="/tags/语义分割/" rel="tag"># 语义分割</a>
           
         </div>
       
@@ -537,15 +540,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/12/02/kd树/" rel="next" title="kd树">
+                <i class="fa fa-chevron-left"></i> kd树
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/02/kd树/" rel="prev" title="kd树">
-                kd树 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -688,7 +691,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本原理"><span class="nav-number">1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂分布"><span class="nav-number">2.</span> <span class="nav-text">逻辑斯蒂分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归模型"><span class="nav-number">3.</span> <span class="nav-text">逻辑斯蒂回归模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造预测函数"><span class="nav-number">3.1.</span> <span class="nav-text">构造预测函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造cost函数"><span class="nav-number">3.2.</span> <span class="nav-text">构造cost函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度下降法求-J-theta-的最小值"><span class="nav-number">3.3.</span> <span class="nav-text">梯度下降法求$J(\theta)$的最小值</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#最大熵模型"><span class="nav-number"></span> <span class="nav-text">最大熵模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是最大熵"><span class="nav-number">1.</span> <span class="nav-text">什么是最大熵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#熵的定义"><span class="nav-number">1.1.</span> <span class="nav-text">熵的定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最大熵模型定义"><span class="nav-number">2.</span> <span class="nav-text">最大熵模型定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最大熵模型-1"><span class="nav-number">2.1.</span> <span class="nav-text">最大熵模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大熵模型学习"><span class="nav-number">2.2.</span> <span class="nav-text">最大熵模型学习</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BiSeNet：实时语义分割"><span class="nav-number">1.</span> <span class="nav-text">BiSeNet：实时语义分割</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.2.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计思想"><span class="nav-number">1.3.</span> <span class="nav-text">设计思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BiSeNet"><span class="nav-number">1.4.</span> <span class="nav-text">BiSeNet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spatial-Path"><span class="nav-number">1.4.1.</span> <span class="nav-text">Spatial Path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Context-Path"><span class="nav-number">1.4.2.</span> <span class="nav-text">Context Path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络架构"><span class="nav-number">1.4.3.</span> <span class="nav-text">网络架构</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
